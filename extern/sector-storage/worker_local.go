@@ -3,7 +3,9 @@ package sectorstorage
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"io"
+	"net"
 	"os"
 	"reflect"
 	"runtime"
@@ -604,11 +606,35 @@ func (l *LocalWorker) memInfo() (memPhysical, memUsed, memSwap, memSwapUsed uint
 	return memPhysical, memUsed, memSwap, memSwapUsed, nil
 }
 
+////summer add 20211109
+func getClientIp() (string, error) {
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		return "", err
+	}
+	for _, address := range addrs {
+		// 检查ip地址判断是否回环地址
+		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				return ipnet.IP.String(), nil
+			}
+		}
+	}
+	return "", errors.New("Can not find the client ip address!")
+}
+
+//summer add end
+
 func (l *LocalWorker) Info(context.Context) (storiface.WorkerInfo, error) {
 	hostname, err := os.Hostname() // TODO: allow overriding from config
 	if err != nil {
 		panic(err)
 	}
+
+	//summer add 20211109
+	ip, _ := getClientIp()
+	hostname = hostname + "-" + ip
+	//summer add end
 
 	gpus, err := ffi.GetGPUDevices()
 	if err != nil {

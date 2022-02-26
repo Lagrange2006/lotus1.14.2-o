@@ -270,6 +270,12 @@ func (sw *schedWorker) requestWindows() bool {
 func (sw *schedWorker) waitForUpdates() (update bool, sched bool, ok bool) {
 	select {
 	case <-sw.heartbeatTimer.C:
+		//summer add 20211109
+		//add this code for that if activeWindows>0 then would be  block until next task
+		if len(sw.worker.activeWindows) > 0 {
+			return true, false, true
+		}
+		//add end
 		return false, false, true
 	case w := <-sw.scheduledWindows:
 		sw.worker.wndLk.Lock()

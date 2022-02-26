@@ -148,7 +148,13 @@ func (m *Miner) Start(_ context.Context) error {
 		return fmt.Errorf("miner already started")
 	}
 	m.stop = make(chan struct{})
-	go m.mine(context.TODO())
+	//summer modified 2021/10/13
+	if _, ok := os.LookupEnv("LOTUS_NO_WNPOST"); ok {
+		log.Warnf("This miner will be disable minning block function.")
+	} else {
+		go m.mine(context.TODO())
+	}
+	//modified end
 	return nil
 }
 
