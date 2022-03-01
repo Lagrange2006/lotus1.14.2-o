@@ -393,6 +393,12 @@ func (sh *scheduler) trySched() {
 					continue
 				}
 
+				//summer add at 2022/02/28
+				if task.taskType != sealtasks.TTFetch && !WorkerHasLayoutAccess(task, windowRequest) {
+					continue
+				}
+				//summer end
+
 				needRes := worker.info.Resources.ResourceSpec(task.sector.ProofType, task.taskType)
 
 				// TODO: allow bigger windows

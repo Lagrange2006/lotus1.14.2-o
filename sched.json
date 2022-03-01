@@ -1,0 +1,129 @@
+{
+  "checkLayout": true,
+  "loadConfigFilePerMinute": 1,
+  "groups": [
+    {
+      "serverName": "s16",
+      "workers": [
+        {
+          "workerId": "w16-1"
+        },
+        {
+          "workerId": "w16-2"
+        }
+      ],
+      "sectors": [
+        {
+          "sectorId": "174373",
+          "allowLocalFullControl": false,
+          "remoteServers": [
+            {
+              "serverName": "s18",
+              "allowedTasks": "C2"
+            },
+              {
+              "serverName": "s20",
+              "allowedTasks": "C2"
+            }
+          ]
+        },
+        {
+          "sectorId": "174374",
+          "allowLocalFullControl": false,
+          "remoteServers": [
+          {
+              "serverName": "s18",
+              "allowedTasks": "C2"
+            },
+              {
+              "serverName": "s20",
+              "allowedTasks": "C2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "serverName": "s18",
+       "workers": [
+        {
+          "workerId": "w18-1"
+        },
+        {
+          "workerId": "w18-2"
+        }
+      ],
+      "sectors": [
+        {
+          "sectorId": "174375",
+          "allowLocalFullControl": false,
+          "remoteServers": [
+            {
+              "serverName": "s16",
+              "allowedTasks": "C2"
+            },
+              {
+              "serverName": "s20",
+              "allowedTasks": "C2"
+            }
+          ]
+        },
+        {
+          "sectorId": "174376",
+          "allowLocalFullControl": false,
+          "remoteServers": [
+          {
+              "serverName": "s16",
+              "allowedTasks": "C2"
+            },
+              {
+              "serverName": "s20",
+              "allowedTasks": "C2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "serverName": "s20",
+      "workers": [
+        {
+          "workerId": "w20-1"
+        },
+        {
+          "workerId": "w20-2"
+        }
+      ],
+     "sectors": [
+        {
+          "sectorId": "174377",
+          "allowLocalFullControl": false,
+          "remoteServers": [
+            {
+              "serverName": "s16",
+              "allowedTasks": "C2"
+            },
+              {
+              "serverName": "s18",
+              "allowedTasks": "C2"
+            }
+          ]
+        },
+        {
+          "sectorId": "174378",
+          "allowLocalFullControl": false,
+          "remoteServers": [
+          {
+              "serverName": "s16",
+              "allowedTasks": "C2"
+            },
+              {
+              "serverName": "s18",
+              "allowedTasks": "C2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
